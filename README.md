@@ -1,20 +1,6 @@
-# Individual IAM assumable roles example
+# iam-policy
 
-Configuration in this directory creates several individual IAM roles which can be assumed from a defined list of [IAM ARNs](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns).
-
-The main difference between `iam-assumable-role` and `iam-assumable-roles` examples is that the former creates just a single role.
-
-# Usage
-
-To run this example you need to execute:
-
-```bash
-$ terraform init
-$ terraform plan -var-file==input.tfvars
-$ terraform apply -var-file==input.tfvars
-```
-
-Run `terraform destroy -var-file==input.tfvars` when you don't need these resources.
+Creates IAM policy.
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
@@ -22,49 +8,43 @@ Run `terraform destroy -var-file==input.tfvars` when you don't need these resour
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.13.0 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 2.23 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 3.35 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 2.23 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 3.35 |
 
 ## Modules
 
-| Name | Source | Version |
-|------|--------|---------|
-| <a name="module_iam_assumable_role_admin"></a> [iam\_assumable\_role\_admin](#module\_iam\_assumable\_role\_admin) | ../../modules/iam-assumable-role | n/a |
-| <a name="module_iam_assumable_role_custom"></a> [iam\_assumable\_role\_custom](#module\_iam\_assumable\_role\_custom) | ../../modules/iam-assumable-role | n/a |
-| <a name="module_iam_assumable_role_custom_trust_policy"></a> [iam\_assumable\_role\_custom\_trust\_policy](#module\_iam\_assumable\_role\_custom\_trust\_policy) | ../../modules/iam-assumable-role | n/a |
-| <a name="module_iam_assumable_role_sts"></a> [iam\_assumable\_role\_sts](#module\_iam\_assumable\_role\_sts) | ../../modules/iam-assumable-role | n/a |
-| <a name="module_iam_policy"></a> [iam\_policy](#module\_iam\_policy) | ../../modules/iam-policy | n/a |
+No modules.
 
 ## Resources
 
 | Name | Type |
 |------|------|
-| [aws_iam_policy_document.custom_trust_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
+| [aws_iam_policy.policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) | resource |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="region"></a> [region](#input\_region) | AWS Region | `string` | `""` | yes |
-| <a name="env"></a> [env](#input\_env) | AWS Environment | `string` | `""` | yes |
-| <a name="businessunit"></a> [businessunit](#input\_businessunit) | Business Unit | `string` | `""` | yes |
-| <a name="application"></a> [application](#input\_application) | Application Name | `string` | `""` | yes |
-| <a name="appowner"></a> [appowner](#input\_appowner) | Application Owner | `string` | `""` | yes |
-| <a name="email"></a> [email](#input\_email) | Application Owner Email Address | `string` | `""` | yes |
+| <a name="input_create_policy"></a> [create\_policy](#input\_create\_policy) | Whether to create the IAM policy | `bool` | `true` | no |
+| <a name="input_description"></a> [description](#input\_description) | The description of the policy | `string` | `"IAM Policy"` | no |
+| <a name="input_name"></a> [name](#input\_name) | The name of the policy | `string` | `""` | no |
+| <a name="input_path"></a> [path](#input\_path) | The path of the policy in IAM | `string` | `"/"` | no |
+| <a name="input_policy"></a> [policy](#input\_policy) | The path of the policy in IAM (tpl file) | `string` | `""` | no |
+| <a name="input_tags"></a> [tags](#input\_tags) | A map of tags to add to all resources. | `map(string)` | `{}` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| <a name="output_iam_instance_profile_id"></a> [iam\_instance\_profile\_id](#output\_iam\_instance\_profile\_id) | IAM Instance profile's ID |
-| <a name="output_iam_role_arn"></a> [iam\_role\_arn](#output\_iam\_role\_arn) | ARN of IAM role |
-| <a name="output_iam_role_name"></a> [iam\_role\_name](#output\_iam\_role\_name) | Name of IAM role |
-| <a name="output_iam_role_path"></a> [iam\_role\_path](#output\_iam\_role\_path) | Path of IAM role |
-| <a name="output_iam_role_unique_id"></a> [iam\_role\_unique\_id](#output\_iam\_role\_unique\_id) | Unique ID of IAM role |
-| <a name="output_role_requires_mfa"></a> [role\_requires\_mfa](#output\_role\_requires\_mfa) | Whether admin IAM role requires MFA |
+| <a name="output_arn"></a> [arn](#output\_arn) | The ARN assigned by AWS to this policy |
+| <a name="output_description"></a> [description](#output\_description) | The description of the policy |
+| <a name="output_id"></a> [id](#output\_id) | The policy's ID |
+| <a name="output_name"></a> [name](#output\_name) | The name of the policy |
+| <a name="output_path"></a> [path](#output\_path) | The path of the policy in IAM |
+| <a name="output_policy"></a> [policy](#output\_policy) | The policy document |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
